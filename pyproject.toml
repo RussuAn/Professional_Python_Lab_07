@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "student-manager-lab07"
+version = "0.7.0"
+description = "Student management with SQLite, SQLAlchemy, repositories and Alembic"
+requires-python = ">=3.11"
+authors = [{name = "Руссу Анастасія"}]
+dependencies = ["SQLAlchemy>=2.0,<3", "alembic>=1.13,<2"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+student-manager = "student_manager.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
