@@ -53,7 +53,8 @@ class StudentRepository:
         return list(self.session.scalars(select(Student).options(selectinload(Student.group)).order_by(Student.id)))
 
     def find_by_last_name(self, surname: str) -> list[Student]:
-        return list(self.session.scalars(select(Student).where(Student.last_name.ilike(surname.strip()))))
+        return [student for student in self.session.scalars(select(Student))
+                if student.last_name.casefold() == surname.strip().casefold()]
 
     def find_by_group(self, group_name: str) -> list[Student]:
         statement = select(Student).join(Group).where(Group.name == group_name.strip().upper()).order_by(Student.id)
